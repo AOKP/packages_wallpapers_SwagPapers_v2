@@ -12,5 +12,9 @@
 		<item>fnv_hgcr_nature_2</item>
 		<item>fnv_nature_r1</item>
 		<item>garyd9</item>
+		<item>fnv_nexus</item>
+		<item>fnv_nexus_r2</item>
+		<item>fnv_nexus_light</item>
+		<item>fnv_nexus_light_r2</item>
     </string-array>
 </resources>
