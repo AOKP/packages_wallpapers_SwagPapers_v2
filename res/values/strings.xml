@@ -1,5 +1,16 @@
 <resources>
+
     <string name="app_name">FNV Wallpapers</string>
-    <string name="wallpaper_instructions">Set wallpaper</string>
-    <string name="pick_wallpaper">Fresh Ingredients</string>
+    <string name="title_activity_wallpaper">FNV Wallpapers</string>
+    <string name="back">Previous</string>
+    <string name="next">Next</string>
+    <string name="page">Page: </string>
+    <string name="set_wallpaper">Set as wallpaper?</string>
+    <string name="save_wallpaper">Save wallpaper to internal storage?</string>
+    <string name="downloading">Downloading…</string>
+    <string name="wait">Please wait</string>
+    <string name="set">Wallpaper set!</string>
+    <string name="saved">Wallpaper saved to</string>
+    <string name="jump">Jump to Page</string>
+
 </resources>
