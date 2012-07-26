@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.fnv.wallpapers"
     android:versionCode="1"
-    android:versionName="1.0 Beta 2" >
+    android:versionName="1.0 Beta 5" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -23,6 +23,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".Preview" />
+        <activity android:name=".Vote" />
     </application>
 
 </manifest>

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <item android:id="@+id/jump" android:showAsAction="always" android:title="@string/jump" android:icon="@drawable/ic_menu_goto"></item>
+    <item android:id="@+id/vote" android:icon="@drawable/ic_menu_mark" android:showAsAction="always"></item>
 </menu>

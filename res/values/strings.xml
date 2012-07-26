@@ -12,5 +12,9 @@
     <string name="set">Wallpaper set!</string>
     <string name="saved">Wallpaper saved to</string>
     <string name="jump">Jump to Page</string>
+    <string name="jump2">Jump to Page:</string>
+    <string name="about">About</string>
+    <string name="wars">Wallpaper Wars</string>
+    <string name="vote">Vote!</string>
 
 </resources>
