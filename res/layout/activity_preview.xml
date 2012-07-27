@@ -37,7 +37,7 @@
                 android:layout_gravity="left"
                 android:layout_weight="1"
                 android:maxLines="2"
-                android:text="Save to Storage" />
+                android:text="@string/save_wallpaper" />
 
             <Button
                 android:id="@+id/set_button"
@@ -48,7 +48,7 @@
                 android:layout_weight="1"
                 android:filterTouchesWhenObscured="true"
                 android:maxLines="2"
-                android:text="Set as Wallpaper" />
+                android:text="@string/set_wallpaper" />
 
             <LinearLayout
                 android:id="@+id/rightSpacer"
