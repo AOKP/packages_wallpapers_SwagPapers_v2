@@ -172,6 +172,7 @@ public class Wallpaper extends Activity implements OnGesturePerformedListener {
         });
     }
     
+    //react to left and right swipes
     public void onGesturePerformed(GestureOverlayView overlay, Gesture gesture) {
 		ArrayList<Prediction> predictions = gestureLib.recognize(gesture);
 		for (Prediction prediction : predictions) {
@@ -272,7 +273,6 @@ public class Wallpaper extends Activity implements OnGesturePerformedListener {
         }
     }
     
-    //I'll do this later
     public void jumpTo() {
     	View view = getLayoutInflater().inflate(R.layout.dialog_jumpto, null);
     	final EditText e = (EditText) view.findViewById(R.id.pageNumber);
@@ -297,6 +297,7 @@ public class Wallpaper extends Activity implements OnGesturePerformedListener {
     	
     }
     
+    //skips to user entered page
     public void skipPage(int p){
     	Log.i(tag, ""+p);
     	final Button back = (Button) findViewById(R.id.backButton);

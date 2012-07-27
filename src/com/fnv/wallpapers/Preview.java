@@ -18,6 +18,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.WallpaperManager;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -28,6 +29,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -87,6 +89,28 @@ public class Preview extends Wallpaper {
 				new StoreFileAsync().execute(link);
 			}
 		});	
+	}
+	
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+	    super.onConfigurationChanged(newConfig);
+	    
+	    //FEATURE_NO_TITLE crashes because setContentView() has already been called
+	    //I'll look into fixes later
+	    if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+	    	//this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+	    	setContentView(R.layout.activity_preview_land);
+			this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+	    	ImageView v = (ImageView) findViewById(R.id.imageView1);
+	    	UrlImageViewHelper.setUrlDrawable(v, link);
+	    }
+	    
+	    if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+	    	Intent restart = new Intent(Preview.this, Preview.class);
+	    	restart.putExtra("wp", link);
+	    	startActivity(restart);
+	    	finish();
+	    }
 	}
 	
     @Override
