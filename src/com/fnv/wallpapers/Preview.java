@@ -186,8 +186,8 @@ class DownloadFileAsync extends AsyncTask<String, String, String> {
     			Log.d("ANDRO_ASYNC", "Lenght of file: " + lengthOfFile);
     			
     			InputStream input = new BufferedInputStream(url.openStream());
-    			OutputStream output = new FileOutputStream(dlDir + fileName);
-    			fileDest  = dlDir + fileName;
+                OutputStream output = new FileOutputStream(getDlDir() + fileName);
+                fileDest  = getDlDir() + fileName;
     			
     			byte data[] = new byte[1024];
     			
@@ -227,7 +227,7 @@ class DownloadFileAsync extends AsyncTask<String, String, String> {
 				e.printStackTrace();
 			}
     		Toast.makeText(getApplicationContext(), R.string.set, Toast.LENGTH_LONG).show();
-    		File file = new File(dlDir + fileName);
+            File file = new File(getDlDir() + fileName);
     		if (file.exists() == true) {
     			file.delete();
     			
@@ -264,9 +264,9 @@ class StoreFileAsync extends AsyncTask<String, String, String> {
 			int lengthOfFile = conexion.getContentLength();
 			Log.d("ANDRO_ASYNC", "Lenght of file: " + lengthOfFile);
 			
-			InputStream input = new BufferedInputStream(url.openStream());
-			OutputStream output = new FileOutputStream(svDir + fileName);
-			fileDest  = svDir + fileName;
+                InputStream input = new BufferedInputStream(url.openStream());
+                OutputStream output = new FileOutputStream(getSvDir() + fileName);
+                fileDest = getSvDir() + fileName;
 			
 			byte data[] = new byte[1024];
 			
@@ -295,7 +295,7 @@ class StoreFileAsync extends AsyncTask<String, String, String> {
 	@Override
 	protected void onPostExecute(String unused) {
 		dismissDialog(DIALOG_DOWNLOAD_PROGRESS);
-		Toast.makeText(getApplicationContext(), getResources().getString(R.string.saved) + " " + svDir + fileName, Toast.LENGTH_LONG).show();
+		Toast.makeText(getApplicationContext(), getResources().getString(R.string.saved) + " " + getSvDir() + fileName, Toast.LENGTH_LONG).show();
 	}   	
 }
 }

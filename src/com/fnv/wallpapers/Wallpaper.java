@@ -1,5 +1,6 @@
 package com.fnv.wallpapers;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
@@ -32,10 +33,10 @@ public class Wallpaper extends Activity implements OnGesturePerformedListener {
 	
 	String tag = "FNV Wallpapers";
 	
-	String link = "https://dl.dropbox.com/u/3270519/Apps/FNV/";
-	String pre= "fnv_";
-	String post = "_small";
-	String ext = ".png";
+	String link;
+	String pre;
+	String post;
+	String ext;
 	public int page = 1;
 	int i1 = 1;
 	int i2 = 2;
@@ -44,12 +45,15 @@ public class Wallpaper extends Activity implements OnGesturePerformedListener {
 	
 	String fileDest = null;
 	String fileName = null;
-	String dlDir = Environment.getExternalStorageDirectory() + "/";
-	String svDir = Environment.getExternalStorageDirectory() + "/FNV/";
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        link = getResourceString(R.string.config_wallpaper_url_prefix);
+        pre = getResourceString(R.string.config_wallpaper_name_prefix);
+        post = getResourceString(R.string.config_wallpaper_thumbnail_suffix);
+        ext = getResourceString(R.string.config_wallpaper_extention);
+
         GestureOverlayView gestureOverlayView = new GestureOverlayView(this);
         View inflate = getLayoutInflater().inflate(R.layout.activity_wallpaper, null);
         gestureOverlayView.addView(inflate);
@@ -171,7 +175,25 @@ public class Wallpaper extends Activity implements OnGesturePerformedListener {
         	}
         });
     }
+
+    protected String getDlDir() {
+        String configFolder = getResourceString(R.string.config_wallpaper_download_loc);
+        if(configFolder != null && !configFolder.isEmpty()) {
+            return new File(Environment.getExternalStorageDirectory(), configFolder).getAbsolutePath();
+        } else {
+            return Environment.getExternalStorageDirectory().getAbsolutePath();
+        }
+    }
     
+    protected String getSvDir() {
+        String configFolder = getResourceString(R.string.config_wallpaper_sdcard_dl_location);
+        if(configFolder != null && !configFolder.isEmpty()) {
+            return new File(Environment.getExternalStorageDirectory(), configFolder).getAbsolutePath();
+        } else {
+            return null;
+        }
+    }
+
     //react to left and right swipes
     public void onGesturePerformed(GestureOverlayView overlay, Gesture gesture) {
 		ArrayList<Prediction> predictions = gestureLib.recognize(gesture);
@@ -339,5 +361,19 @@ public class Wallpaper extends Activity implements OnGesturePerformedListener {
         UrlImageViewHelper.setUrlDrawable(v4, link + pre + i4 + post + ext, R.drawable.ic_placeholder);
         Log.i(tag, link + pre + i4 + post + ext);
     	
+    }
+
+    protected String getWallpaperDestinationPath() {
+        String configFolder = getResourceString(R.string.config_wallpaper_sdcard_dl_location);
+        if (configFolder != null && !configFolder.isEmpty()) {
+            return new File(Environment.getExternalStorageDirectory(), configFolder)
+                    .getAbsolutePath();
+        }
+        // couldn't find resource?
+        return null;
+    }
+
+    protected String getResourceString(int stringId) {
+        return getApplicationContext().getResources().getString(stringId);
     }
 }

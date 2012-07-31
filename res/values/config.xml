@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Where to download wallpapers from -->
+    <string name="config_wallpaper_url_prefix">https://dl.dropbox.com/u/3270519/Apps/FNV/</string>
+    
+    <!-- Prefix of each wallpaper -->
+	<string name="config_wallpaper_name_prefix">fnv_</string>
+	
+	<!-- Wallpaper extention -->
+	<string name="config_wallpaper_extention">.png</string>
+	
+	<!-- Thumbnail suffix -->
+	<string name="config_wallpaper_thumbnail_suffix">_small</string>
+	
+	<!-- Where to store the wallpapers (just the folder name) -->
+	<string name="config_wallpaper_sdcard_dl_location">FNV</string>
+	
+	<!-- Directory to download wallpapers to on external storage. Leave blank for "/sdcard/" -->
+	<string name="config_wallpaper_download_loc"></string>
+</resources>
