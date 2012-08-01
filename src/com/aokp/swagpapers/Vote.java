@@ -1,4 +1,4 @@
-package com.fnv.wallpapers;
+package com.aokp.swagpapers;
 
 import android.app.ActionBar;
 import android.app.AlertDialog;
