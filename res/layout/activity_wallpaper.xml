@@ -54,7 +54,7 @@
             android:layout_weight="1"
             android:orientation="horizontal" >
 
-            <ImageView
+            <com.aokp.swagpapers.ThumbnailView
                 android:id="@+id/imageView1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -64,7 +64,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_weight="1" />
 
-            <ImageView
+            <com.aokp.swagpapers.ThumbnailView
                 android:id="@+id/imageView2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -81,9 +81,9 @@
             android:layout_weight="1"
             android:orientation="horizontal" >
 
-            <ImageView
+            <com.aokp.swagpapers.ThumbnailView
                 android:id="@+id/imageView3"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="5dp"
@@ -91,9 +91,9 @@
                 android:layout_marginTop="5dp"
                 android:layout_weight="1" />
 
-            <ImageView
+            <com.aokp.swagpapers.ThumbnailView
                 android:id="@+id/imageView4"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="5dp"

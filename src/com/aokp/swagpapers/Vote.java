@@ -9,7 +9,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class Vote extends Wallpaper {
+public class Vote extends WallpaperActivity {
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

@@ -1,6 +1,29 @@
 
 package com.aokp.swagpapers;
 
+import android.app.ActionBar;
+import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.app.WallpaperManager;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -12,34 +35,16 @@ import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
+public class Preview extends Activity {
 
-import android.app.ActionBar;
-import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.app.WallpaperManager;
-import android.content.Intent;
-import android.content.res.Configuration;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Environment;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Toast;
-
-public class Preview extends Wallpaper {
+    final static String TAG = "Preview";
 
     String link = "";
     ProgressDialog mProgressDialog;
     public static final int DIALOG_DOWNLOAD_PROGRESS = 0;
+
+    String fileDest = null;
+    String fileName = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,7 +65,7 @@ public class Preview extends Wallpaper {
             Log.d("PREVIEW", "url: " + link);
             UrlImageViewHelper.setUrlDrawable(p, link);
         } else {
-            Intent home = new Intent(Preview.this, Wallpaper.class);
+            Intent home = new Intent(Preview.this, WallpaperActivity.class);
             Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG)
                     .show();
             startActivity(home);
@@ -68,12 +73,12 @@ public class Preview extends Wallpaper {
         }
 
         // Check if the FNV folder exists already
-        File f = new File(getSvDir());
-        Log.i(tag, "Check for external SD: " + f.getAbsolutePath());
+        File f = new File(WallpaperActivity.getSvDir(getApplicationContext()));
+        Log.i(TAG, "Check for external SD: " + f.getAbsolutePath());
         if (f.isDirectory() && f.exists()) {
-            Log.i(tag, "FNV folder exists");
+            Log.i(TAG, "FNV folder exists");
         } else {
-            Log.i(tag, "FNV folder does not exist. Creating...");
+            Log.i(TAG, "FNV folder does not exist. Creating...");
             f.mkdirs();
         }
 
@@ -263,7 +268,9 @@ public class Preview extends Wallpaper {
 
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
                 Date now = new Date();
-                fileName = formatter.format(now) + ext;
+                fileName = formatter.format(now)
+                        + aurl[0].substring(aurl[0].lastIndexOf("."), aurl[0].length());
+                // TODO better way of finding the extention
 
                 int lengthOfFile = conexion.getContentLength();
                 Log.d("ANDRO_ASYNC", "Lenght of file: " + lengthOfFile);
@@ -304,5 +311,13 @@ public class Preview extends Wallpaper {
                     getResources().getString(R.string.saved) + " " + getSvDir() + fileName,
                     Toast.LENGTH_LONG).show();
         }
+    }
+
+    String getDlDir() {
+        return WallpaperActivity.getDlDir(getApplicationContext());
+    }
+
+    String getSvDir() {
+        return WallpaperActivity.getSvDir(getApplicationContext());
     }
 }

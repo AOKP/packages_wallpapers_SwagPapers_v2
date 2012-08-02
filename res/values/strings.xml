@@ -1,7 +1,7 @@
 <resources>
 
-    <string name="app_name">FNV Wallpapers</string>
-    <string name="title_activity_wallpaper">FNV Wallpapers</string>
+    <string name="app_name">SwagPapers</string>
+    <string name="title_activity_wallpaper">Swag Papers</string>
     <string name="back">Previous</string>
     <string name="next">Next</string>
     <string name="page">Page: </string>
