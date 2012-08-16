@@ -28,6 +28,10 @@ public class NavigationBarCategoryAdapater implements SpinnerAdapter {
 
         mCategories = cats;
     }
+    
+    public ArrayList<WallpaperCategory> getCategories() {
+        return mCategories;
+    }
 
     @Override
     public int getCount() {

@@ -37,7 +37,7 @@ import java.util.ArrayList;
 
 public class WallpaperActivity extends Activity {
 
-    protected final String TAG = "SwagPapers";
+    public final String TAG = "SwagPapers";
     protected static final String MANIFEST = "wallpaper_manifest.xml";
     protected static final int THUMBS_TO_SHOW = 4;
 
@@ -50,6 +50,7 @@ public class WallpaperActivity extends Activity {
     ArrayList<WallpaperCategory> categories = null;
     ProgressDialog mLoadingDialog;
     WallpaperPreviewFragment mPreviewFragment;
+    NavigationBarCategoryAdapater mCategoryAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -73,7 +74,8 @@ public class WallpaperActivity extends Activity {
 
         ActionBar ab = getActionBar();
         ab.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-        ab.setListNavigationCallbacks(new NavigationBarCategoryAdapater(getApplicationContext(),
+        ab.setListNavigationCallbacks(mCategoryAdapter = new NavigationBarCategoryAdapater(
+                getApplicationContext(),
                 categories),
                 new ActionBar.OnNavigationListener() {
                     @Override
@@ -91,6 +93,7 @@ public class WallpaperActivity extends Activity {
 
     public static class WallpaperPreviewFragment extends Fragment {
 
+        static final String TAG = "PreviewFragment";
         WallpaperActivity mActivity;
         View mView;
 
@@ -146,7 +149,7 @@ public class WallpaperActivity extends Activity {
         }
 
         public ArrayList<WallpaperCategory> getCategories() {
-            return mActivity.categories;
+            return mActivity.mCategoryAdapter.getCategories();
         }
 
         protected Wallpaper getWallpaper(int realIndex) {
@@ -157,19 +160,18 @@ public class WallpaperActivity extends Activity {
             for (ThumbnailView v : thumbs)
                 v.setVisibility(View.INVISIBLE);
 
-            int lastRealIndex = -1;
+            final int numWallpapersInCategory = getCategories().get(selectedCategory)
+                    .getWallpapers().size();
+            boolean enableForward = true;
 
             for (int i = 0; i < thumbs.length; i++) {
                 final int realIndex = (currentPage * thumbs.length + i);
-
-                if (realIndex >= getCategories().get(selectedCategory).getWallpapers().size()) {
-                    lastRealIndex = realIndex;
+                if (realIndex >= (numWallpapersInCategory - 1)) {
+                    enableForward = false;
                     break;
                 }
 
                 Wallpaper w = getWallpaper(realIndex);
-                Log.d("WALLPAPER", "real index: " + realIndex);
-                Log.d("WALLPAPER", "thumb url: " + w.getThumbUrl());
                 thumbs[i].setOnClickListener(null);
                 thumbs[i].getName().setText(w.getName());
                 thumbs[i].getAuthor().setText(w.getAuthor());
@@ -178,9 +180,7 @@ public class WallpaperActivity extends Activity {
             }
 
             back.setEnabled(currentPage != 0);
-            next.setEnabled(lastRealIndex < getCategories().get(selectedCategory).getWallpapers()
-                    .size());
-
+            next.setEnabled(enableForward);
         }
 
         public void next() {
