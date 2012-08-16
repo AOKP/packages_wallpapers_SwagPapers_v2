@@ -18,5 +18,7 @@
     <string name="vote">Vote!</string>
     <string name="wallpaper">wallpaper</string>
     <string name="setting_wallpaper">Setting wallpaper…</string>
+    <string name="category_name">Category Name</string>
+    <string name="choose_category">Choose category</string>
 
 </resources>
