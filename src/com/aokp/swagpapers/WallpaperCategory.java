@@ -6,13 +6,24 @@ import java.util.List;
 
 public class WallpaperCategory {
 
+    static int totalCategoryCount = 0;
+
     String id;
     String name;
     List<Wallpaper> wallpapers;
 
     public WallpaperCategory(String i, String n) {
-        id = i;
-        name = n;
+        totalCategoryCount++;
+        if (i == null)
+            id = totalCategoryCount + "";
+        else
+            id = i;
+
+        if (n == null)
+            n = totalCategoryCount + "";
+        else
+            name = n;
+        
         wallpapers = new ArrayList<Wallpaper>();
     }
 
@@ -42,5 +53,9 @@ public class WallpaperCategory {
 
     public void setWallpapers(List<Wallpaper> wallpapers) {
         this.wallpapers = wallpapers;
+    }
+
+    public String toString() {
+        return name;
     }
 }

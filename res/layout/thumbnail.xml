@@ -14,7 +14,8 @@
         android:layout_width="wrap_content"
         android:layout_height="42dip"
         android:layout_alignParentTop="true"
-        android:gravity="center_vertical" >
+        android:gravity="center_vertical"
+        android:orientation="vertical" >
 
         <TextView
             android:id="@+id/name"
@@ -36,6 +37,7 @@
             android:singleLine="true"
             android:text="author"
             android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textSize="12dp"
             android:textColor="@android:color/white" />
     </LinearLayout>
 

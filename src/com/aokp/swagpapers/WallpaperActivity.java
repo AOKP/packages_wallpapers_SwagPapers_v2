@@ -1,6 +1,7 @@
 
 package com.aokp.swagpapers;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -39,8 +40,16 @@ public class WallpaperActivity extends Activity {
     protected final String TAG = "SwagPapers";
     protected static final String MANIFEST = "wallpaper_manifest.xml";
     protected static final int THUMBS_TO_SHOW = 4;
+
+    /*
+     * pull the manifest from the web server specified in config.xml or pull
+     * wallpaper_manifest.xml from local assets/ folder for testing
+     */
+    public static final boolean USE_LOCAL_MANIFEST = true;
+
     ArrayList<WallpaperCategory> categories = null;
     ProgressDialog mLoadingDialog;
+    WallpaperPreviewFragment mPreviewFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,11 +65,28 @@ public class WallpaperActivity extends Activity {
     }
 
     protected void loadPreviewFragment() {
-        WallpaperPreviewFragment fragment = new WallpaperPreviewFragment();
+        mPreviewFragment = new WallpaperPreviewFragment();
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
-        ft.add(android.R.id.content, fragment);
+        ft.add(android.R.id.content, mPreviewFragment);
         ft.commit();
+
+        ActionBar ab = getActionBar();
+        ab.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        ab.setListNavigationCallbacks(new NavigationBarCategoryAdapater(getApplicationContext(),
+                categories),
+                new ActionBar.OnNavigationListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(int itemPosition, long itemId) {
+                        setCategory(itemPosition);
+                        return true;
+                    }
+                });
+        ab.setDisplayShowTitleEnabled(false);
+    }
+
+    protected void setCategory(int cat) {
+        mPreviewFragment.setCategory(cat);
     }
 
     public static class WallpaperPreviewFragment extends Fragment {
@@ -69,18 +95,23 @@ public class WallpaperActivity extends Activity {
         View mView;
 
         public int currentPage = -1;
-        public int highestExistingIndex = 0;
         Button back;
         Button next;
         TextView pageNum;
         ThumbnailView[] thumbs;
-        protected int selectedCategory = 0;
+        public int selectedCategory = 0; // *should* be <ALL> wallpapers
 
         @Override
         public void onActivityCreated(Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
             mActivity = (WallpaperActivity) getActivity();
             next(); // load initial page
+        }
+
+        public void setCategory(int cat) {
+            selectedCategory = cat;
+            currentPage = -1;
+            next();
         }
 
         @Override
@@ -320,16 +351,24 @@ public class WallpaperActivity extends Activity {
 
         @Override
         protected ArrayList<WallpaperCategory> doInBackground(Void... v) {
-            try {
-                URL url = new URL(getResourceString(R.string.config_wallpaper_manifest_url));
-                URLConnection connection = url.openConnection();
-                connection.connect();
-                // this will be useful so that you can show a typical 0-100%
-                // progress bar
-                int fileLength = connection.getContentLength();
 
-                // download the file
-                InputStream input = new BufferedInputStream(url.openStream());
+            try {
+                InputStream input = null;
+
+                if (USE_LOCAL_MANIFEST) {
+                    input = getApplicationContext().getAssets().open(MANIFEST);
+                } else {
+                    URL url = new URL(getResourceString(R.string.config_wallpaper_manifest_url));
+                    URLConnection connection = url.openConnection();
+                    connection.connect();
+                    // this will be useful so that you can show a typical
+                    // 0-100%
+                    // progress bar
+                    int fileLength = connection.getContentLength();
+
+                    // download the file
+                    input = new BufferedInputStream(url.openStream());
+                }
                 OutputStream output = getApplicationContext().openFileOutput(
                         MANIFEST, MODE_PRIVATE);
 
