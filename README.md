@@ -9,7 +9,8 @@ Adding Categories
 * `name="<string>"` visual name
 
 	<category id="<string>" name="<string>" />
-    
+
+
 Adding Wallpapers
 -----------------
 * `url="<url of wallpaper>"`
