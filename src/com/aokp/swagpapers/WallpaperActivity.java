@@ -45,7 +45,7 @@ public class WallpaperActivity extends Activity {
      * pull the manifest from the web server specified in config.xml or pull
      * wallpaper_manifest.xml from local assets/ folder for testing
      */
-    public static final boolean USE_LOCAL_MANIFEST = true;
+    public static final boolean USE_LOCAL_MANIFEST = false;
 
     ArrayList<WallpaperCategory> categories = null;
     ProgressDialog mLoadingDialog;
