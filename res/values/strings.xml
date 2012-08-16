@@ -17,5 +17,6 @@
     <string name="wars">Wallpaper Wars</string>
     <string name="vote">Vote!</string>
     <string name="wallpaper">wallpaper</string>
+    <string name="setting_wallpaper">Setting wallpaper…</string>
 
 </resources>

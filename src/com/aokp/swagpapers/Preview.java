@@ -9,7 +9,10 @@ import android.app.WallpaperManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -48,6 +51,7 @@ public class Preview extends Activity {
 
     String fileDest = null;
     String fileName = null;
+    Drawable loadedWallpaper = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,6 +79,7 @@ public class Preview extends Activity {
                         boolean loadedFromCache) {
                     progress.setIndeterminate(false);
                     progress.setVisibility(View.GONE);
+                    loadedWallpaper = loadedDrawable;
                 }
             });
         } else {
@@ -163,8 +168,9 @@ public class Preview extends Activity {
         switch (id) {
             case DIALOG_DOWNLOAD_PROGRESS:
                 mProgressDialog = new ProgressDialog(this);
-                mProgressDialog.setMessage(getResources().getString(R.string.downloading));
-                mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                mProgressDialog.setMessage(getResources().getString(R.string.setting_wallpaper));
+                mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                mProgressDialog.setIndeterminate(true);
                 mProgressDialog.setCancelable(true);
                 mProgressDialog.show();
                 return mProgressDialog;
@@ -186,44 +192,24 @@ public class Preview extends Activity {
 
         @Override
         protected String doInBackground(String... aurl) {
-            int count;
-
+            WallpaperManager wallpaperManager = WallpaperManager
+                    .getInstance(getApplicationContext());
             try {
-
-                mProgressDialog.setProgress(0);
-
-                URL url = new URL(aurl[0]);
-                URLConnection conexion = url.openConnection();
-                conexion.connect();
-
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
-                Date now = new Date();
-                fileName = formatter.format(now) + ".jpg";
-
-                int lengthOfFile = conexion.getContentLength();
-                Log.d("ANDRO_ASYNC", "Lenght of file: " + lengthOfFile);
-
-                InputStream input = new BufferedInputStream(url.openStream());
-                OutputStream output = new FileOutputStream(getDlDir() + fileName);
-                fileDest = getDlDir() + fileName;
-
-                byte data[] = new byte[1024];
-
-                long total = 0;
-
-                while ((count = input.read(data)) != -1) {
-                    total += count;
-                    publishProgress("" + (int) ((total * 100) / lengthOfFile));
-                    output.write(data, 0, count);
-                }
-
-                output.flush();
-                output.close();
-                input.close();
-            } catch (Exception e) {
+                wallpaperManager.setBitmap(drawableToBitmap(loadedWallpaper));
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-
+            File file = new File(getDlDir() + fileName);
+            if (file.exists() == true) {
+                file.delete();
+            }
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            mProgressDialog.cancel();
+            Toast.makeText(getApplicationContext(), R.string.set, Toast.LENGTH_LONG).show();
         }
 
         protected void onProgressUpdate(String... progress) {
@@ -231,27 +217,6 @@ public class Preview extends Activity {
             mProgressDialog.setProgress(Integer.parseInt(progress[0]));
         }
 
-        @SuppressWarnings("deprecation")
-        @Override
-        protected void onPostExecute(String unused) {
-            dismissDialog(DIALOG_DOWNLOAD_PROGRESS);
-            mProgressDialog.setProgress(0);
-            WallpaperManager wallpaperManager = WallpaperManager.getInstance(Preview.this);
-            getResources().getDrawable(R.drawable.ic_launcher);
-            Bitmap wallpaper = BitmapFactory.decodeFile(fileDest);
-            try {
-                wallpaperManager.setBitmap(wallpaper);
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            Toast.makeText(getApplicationContext(), R.string.set, Toast.LENGTH_LONG).show();
-            File file = new File(getDlDir() + fileName);
-            if (file.exists() == true) {
-                file.delete();
-
-            }
-        }
     }
 
     // Downloads the wallpaper in Async with a dialog
@@ -328,5 +293,19 @@ public class Preview extends Activity {
 
     String getSvDir() {
         return WallpaperActivity.getSvDir(getApplicationContext());
+    }
+
+    public static Bitmap drawableToBitmap(Drawable drawable) {
+        if (drawable instanceof BitmapDrawable) {
+            return ((BitmapDrawable) drawable).getBitmap();
+        }
+
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
+                drawable.getIntrinsicHeight(), Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+
+        return bitmap;
     }
 }
