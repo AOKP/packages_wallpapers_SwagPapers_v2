@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">SwagPapers</string>
+    <string name="app_name">AOKP Wallpapers</string>
     <string name="title_activity_wallpaper">Swag Papers</string>
     <string name="back">Previous</string>
     <string name="next">Next</string>
@@ -16,5 +16,6 @@
     <string name="about">About</string>
     <string name="wars">Wallpaper Wars</string>
     <string name="vote">Vote!</string>
+    <string name="wallpaper">wallpaper</string>
 
 </resources>
