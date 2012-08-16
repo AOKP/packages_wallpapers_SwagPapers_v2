@@ -6,8 +6,9 @@ All XML tags (like id, name, etc) are optional
 Adding Categories
 -----------------
 * `id="<string>"` unique id string 
-* `name="<string>"` visual name
+* `name="<string>"` visual name 
 
+### Example
 	`<category id="<string>" name="<string>" />`
 
 
@@ -19,9 +20,10 @@ Adding Wallpapers
 * `date="<date added>"` may be used for filtering later
 * `name="<wallpaper name>"`
 
-	<wallpaper 
+### Example
+	`<wallpaper 
 		url="someurl.jpg"
 		thumbUrl="someurl_small.jpg"
 		author="exmaple"
 		date="May 19, 2012"
-		name="Some Wallpaper" />	
+		name="Some Wallpaper" />`	
