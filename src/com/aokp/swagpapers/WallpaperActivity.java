@@ -249,19 +249,14 @@ public class WallpaperActivity extends Activity {
 
         @Override
         public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-            inflater.inflate(R.menu.activity_wallpaper, menu);
             super.onCreateOptionsMenu(menu, inflater);
         }
 
         public boolean onOptionsItemSelected(MenuItem item) {
-            // Handle item selection
             switch (item.getItemId()) {
                 case R.id.jump:
                     jumpTo();
                     return true;
-                case R.id.vote:
-                    Intent v = new Intent(mActivity, Vote.class);
-                    startActivity(v);
                 default:
                     return super.onOptionsItemSelected(item);
             }

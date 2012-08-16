@@ -93,9 +93,7 @@ public class Preview extends Activity {
         File f = new File(WallpaperActivity.getSvDir(getApplicationContext()));
         Log.i(TAG, "Check for external SD: " + f.getAbsolutePath());
         if (f.isDirectory() && f.exists()) {
-            Log.i(TAG, "FNV folder exists");
         } else {
-            Log.i(TAG, "FNV folder does not exist. Creating...");
             f.mkdirs();
         }
 
@@ -107,7 +105,6 @@ public class Preview extends Activity {
         s.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 new StoreFileAsync().execute(link);
             }
         });
@@ -179,8 +176,6 @@ public class Preview extends Activity {
         }
     }
 
-    // Downloads the wallpaper in Async with a dialog
-    // This one just sets the wallpaper
     class DownloadFileAsync extends AsyncTask<String, String, String> {
 
         @SuppressWarnings("deprecation")
@@ -219,8 +214,6 @@ public class Preview extends Activity {
 
     }
 
-    // Downloads the wallpaper in Async with a dialog
-    // This one saves the wallpaper
     class StoreFileAsync extends AsyncTask<String, String, String> {
 
         @SuppressWarnings("deprecation")
