@@ -8,7 +8,7 @@ Adding Categories
 * `id="<string>"` unique id string 
 * `name="<string>"` visual name
 
-	<category id="<string>" name="<string>" />
+	`<category id="<string>" name="<string>" />`
 
 
 Adding Wallpapers
