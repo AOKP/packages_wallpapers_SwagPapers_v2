@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,8 +21,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.koushikdutta.urlimageviewhelper.UrlImageViewCallback;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 
 import java.io.BufferedInputStream;
@@ -57,13 +60,23 @@ public class Preview extends Activity {
         ImageView p = (ImageView) findViewById(R.id.preView);
         Button d = (Button) findViewById(R.id.set_button);
         Button s = (Button) findViewById(R.id.save_button);
+        final ProgressBar progress = (ProgressBar) findViewById(R.id.progress_bar);
+        progress.setVisibility(View.VISIBLE);
+        progress.setIndeterminate(true);
 
         Bundle extras = getIntent().getExtras();
 
         if (extras != null) {
             link = extras.getString("wp");
             Log.d("PREVIEW", "url: " + link);
-            UrlImageViewHelper.setUrlDrawable(p, link);
+            UrlImageViewHelper.setUrlDrawable(p, link, new UrlImageViewCallback() {
+                @Override
+                public void onLoaded(ImageView imageView, Drawable loadedDrawable, String url,
+                        boolean loadedFromCache) {
+                    progress.setIndeterminate(false);
+                    progress.setVisibility(View.GONE);
+                }
+            });
         } else {
             Intent home = new Intent(Preview.this, WallpaperActivity.class);
             Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG)
@@ -72,7 +85,6 @@ public class Preview extends Activity {
             finish();
         }
 
-        // Check if the FNV folder exists already
         File f = new File(WallpaperActivity.getSvDir(getApplicationContext()));
         Log.i(TAG, "Check for external SD: " + f.getAbsolutePath());
         if (f.isDirectory() && f.exists()) {
@@ -83,13 +95,10 @@ public class Preview extends Activity {
         }
 
         d.setOnClickListener(new View.OnClickListener() {
-
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 new DownloadFileAsync().execute(link);
             }
         });
-
         s.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
