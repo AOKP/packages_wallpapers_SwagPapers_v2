@@ -5,18 +5,18 @@ All XML tags (like id, name, etc) are optional
 
 Adding Categories
 -----------------
-*`id="<string>"` unique id string 
-*`name="<string>"` visual name
+* `id="<string>"` unique id string 
+* `name="<string>"` visual name
 
 	<category id="<string>" name="<string>" />
     
 Adding Wallpapers
 -----------------
-*`url="<url of wallpaper>"`
-*`thumbUrl="<url of thumbnail>"`
-*`author="<author>"` may be used for filtering later
-*`date="<date added>"` may be used for filtering later
-*`name="<wallpaper name>"`
+* `url="<url of wallpaper>"`
+* `thumbUrl="<url of thumbnail>"`
+* `author="<author>"` may be used for filtering later
+* `date="<date added>"` may be used for filtering later
+* `name="<wallpaper name>"`
 
 	<wallpaper 
 		url="someurl.jpg"
