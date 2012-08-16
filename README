@@ -1,0 +1,10 @@
+Categories accept:
+    id="<string>" unique id string
+    name="<string>" visual name
+    
+Wallpapers accept:
+    url="<url of wallpaper>"
+    thumbUrl="<url of thumbnail>"
+    author="<author>" may be used for filtering later
+    date="<date added>" may be used for filtering later
+    name="<wallpaper name">
