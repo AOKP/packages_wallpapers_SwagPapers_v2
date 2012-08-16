@@ -9,7 +9,7 @@ Adding Categories
 * `name="<string>"` visual name 
 
 ### Example
-	`<category id="<string>" name="<string>" />`
+	<category id="<string>" name="<string>" />
 
 
 Adding Wallpapers
@@ -21,9 +21,9 @@ Adding Wallpapers
 * `name="<wallpaper name>"`
 
 ### Example
-	`<wallpaper 
+	<wallpaper 
 		url="someurl.jpg"
 		thumbUrl="someurl_small.jpg"
 		author="exmaple"
 		date="May 19, 2012"
-		name="Some Wallpaper" />`	
+		name="Some Wallpaper" />
