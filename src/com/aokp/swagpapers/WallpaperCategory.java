@@ -7,13 +7,13 @@ import java.util.List;
 public class WallpaperCategory {
 
     static int totalCategoryCount = 0;
-
+    final int localIndex;
     String id;
     String name;
     List<Wallpaper> wallpapers;
 
     public WallpaperCategory(String i, String n) {
-        totalCategoryCount++;
+        localIndex = totalCategoryCount++;
         if (i == null)
             id = totalCategoryCount + "";
         else
@@ -23,7 +23,7 @@ public class WallpaperCategory {
             n = totalCategoryCount + "";
         else
             name = n;
-        
+
         wallpapers = new ArrayList<Wallpaper>();
     }
 

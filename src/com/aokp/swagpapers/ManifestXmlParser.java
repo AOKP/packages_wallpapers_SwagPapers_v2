@@ -56,8 +56,7 @@ public class ManifestXmlParser extends DefaultHandler {
             String date = attributes.getValue("date");
             String name = attributes.getValue("name");
 
-            wp.setName(name != null ? name : mContext.getString(R.string.wallpaper) + " #"
-                    + (currentCategory.getWallpapers().size() + 1));
+            wp.setName(name);
             wp.setAuthor(author != null ? author : "");
             wp.setDate(date != null ? date : "");
             wp.setThumbUrl(xmlThumbUrl != null ? xmlThumbUrl : generateThumbUrl(url));

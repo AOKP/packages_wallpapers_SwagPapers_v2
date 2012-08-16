@@ -9,7 +9,16 @@ public class Wallpaper {
     String thumbUrl;
     String date;
 
+    static int wallpapersCreated = 0;
+    final int localIndex;
+
+    public Wallpaper() {
+        localIndex = wallpapersCreated++;
+    }
+
     public String getName() {
+        if (name == null || name.isEmpty())
+            return "Wallpaper #" + localIndex;
         return name;
     }
 
