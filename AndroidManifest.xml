@@ -17,7 +17,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".WallpaperActivity"
-            android:label="@string/title_activity_wallpaper" >
+            android:label="@string/title_activity_wallpaper"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.SET_WALLPAPER" />
 
