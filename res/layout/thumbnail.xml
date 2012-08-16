@@ -24,7 +24,6 @@
             android:layout_marginLeft="8dip"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="name"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@android:color/white" />
 
@@ -35,7 +34,6 @@
             android:layout_marginLeft="16dip"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="author"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textSize="12dp"
             android:textColor="@android:color/white" />
