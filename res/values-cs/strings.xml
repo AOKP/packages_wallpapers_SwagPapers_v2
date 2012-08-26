@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Tapety AOKP</string>
+  <string name="title_activity_wallpaper">Swag pety</string>
+  <string name="back">Předchozí</string>
+  <string name="next">Další</string>
+  <string name="page">Stránka: </string>
+  <string name="set_wallpaper">Nastavit jako tapetu</string>
+  <string name="save_wallpaper">Uložit do zařízení</string>
+  <string name="downloading">Stahování…</string>
+  <string name="wait">Chvilku strpení</string>
+  <string name="set">Tapeta nastavena!</string>
+  <string name="saved">Tapeta uložena do</string>
+  <string name="jump">Skočit na stránku</string>
+  <string name="jump2">Skočit na stránku:</string>
+  <string name="about">O aplikaci</string>
+  <string name="wars">Tapetové války</string>
+  <string name="vote">Hlasovat!</string>
+  <string name="wallpaper">tapeta</string>
+  <string name="setting_wallpaper">Nastavuje se tapeta…</string>
+  <string name="category_name">Jméno kategorie</string>
+  <string name="choose_category">Zvolit kategorii</string>
+</resources>
