@@ -62,9 +62,7 @@
         <wallpaper
             author="kwes1020"
             url="http://aokp.co/wallpapers/kwes1020_aokpwp2.png" />
-    </category>
 
-    <category name="Newest" >
         <wallpaper
             author="gleezbo"
             url="http://aokp.co/wallpapers/gleezbo_orb.png" />
@@ -184,6 +182,13 @@
         <wallpaper
             author="daxxmax"
             url="http://aokp.co/wallpapers/daxxmax_aokp_galaxy.jpg" />
+    </category>
+
+    <category name="Newest" >
+
+        <wallpaper
+            author="KhasMek"
+            url="http://aokp.co/wallpapers/khasmek_kcka.png" />
     </category>
 
     <category name="Older Wallpapers" >
