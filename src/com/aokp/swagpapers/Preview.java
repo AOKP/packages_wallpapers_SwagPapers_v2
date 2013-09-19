@@ -76,7 +76,7 @@ public class Preview extends Activity {
             UrlImageViewHelper.setUrlDrawable(p, link, new UrlImageViewCallback() {
                 @Override
                 public void onLoaded(ImageView imageView, Drawable loadedDrawable, String url,
-                        boolean loadedFromCache) {
+                        boolean loadedFromCache, boolean error) {
                     progress.setIndeterminate(false);
                     progress.setVisibility(View.GONE);
                     loadedWallpaper = loadedDrawable;
