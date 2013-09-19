@@ -9,7 +9,7 @@ public class Wallpaper {
     String thumbUrl;
     String date;
 
-    static int wallpapersCreated = 0;
+    public static int wallpapersCreated = 0;
     final int localIndex;
 
     public Wallpaper() {

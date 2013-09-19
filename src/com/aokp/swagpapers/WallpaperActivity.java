@@ -65,6 +65,12 @@ public class WallpaperActivity extends Activity {
         new LoadWallpaperManifest().execute();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        Wallpaper.wallpapersCreated = 0;
+    }
+
     protected void loadPreviewFragment() {
         mPreviewFragment = new WallpaperPreviewFragment();
         FragmentManager fragmentManager = getFragmentManager();
