@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Where to store the wallpapers (just the folder name) -->
-    <string name="config_wallpaper_sdcard_dl_location">AOKP</string>
+    <string name="config_wallpaper_sdcard_dl_location">AOSPAL</string>
 
     <!-- Directory to download wallpapers to on external storage. Leave blank for "/sdcard/" -->
     <string name="config_wallpaper_download_loc"></string>
