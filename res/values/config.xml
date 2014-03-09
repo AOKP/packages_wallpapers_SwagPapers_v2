@@ -8,6 +8,6 @@
     <string name="config_wallpaper_download_loc"></string>
 
     <!-- url to the wallpaper manifest -->
-    <string name="config_wallpaper_manifest_url">https://raw.github.com/AOKP/packages_wallpapers_SwagPapers_v2/gh-pages/wallpaper_manifest.xml</string>
+    <string name="config_wallpaper_manifest_url">https://raw.github.com/JescoWalker/packages_wallpapers_AOSPAL/gh-pages/wallpaper_manifest.xml</string>
 
 </resources>
